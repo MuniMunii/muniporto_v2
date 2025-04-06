@@ -1,7 +1,6 @@
-import { BubbleLeft } from "./bubbleChat"
+import { BubbleLeft, BubbleRight } from "./bubbleChat"
 import { useEffect, useState } from "react"
-export function IntroductionTest() {
-    const introText = ["Hello", "My Name is Ramzi!, Sometime they called me Muni", "Nice to meet you!", "Etc 2", "Nice to meet you!", "Etc 2", "Nice to meet you!", "Etc 2", "Nice to meet you!", "Etc 2"];
+ function TextAppear({setShowChoice,text,userMsg}:{setShowChoice:React.Dispatch<React.SetStateAction<boolean>>,text:string[],userMsg:string|null}) {
     // nympen state introtext yang udah ke display
     const [displayed, setDisplayed] = useState<string[]>([]);
     const [loadingIndex, setLoadingIndex] = useState<number | null>(0);
@@ -10,19 +9,21 @@ export function IntroductionTest() {
       if (loadingIndex === null) return;
       const timer = setTimeout(() => {
         // manggil text sama index loading index yang udah kepanggil
-        setDisplayed((prev) => [...prev, introText[loadingIndex]]);
+        setDisplayed((prev) => [...prev, text[loadingIndex]]);
         // expresi kalo loading index lebih kecil dari length akhir introtext 
-        if (loadingIndex < introText.length - 1) {
+        if (loadingIndex < text.length - 1) {
           setLoadingIndex(loadingIndex + 1);
         } else {
           setLoadingIndex(null);
+          setShowChoice(true)
         }
       }, 1500);
       return () => clearTimeout(timer);
     }, [loadingIndex]);
   
     return (
-      <div className="flex flex-col gap-y-3">
+      <>
+      {userMsg&&<BubbleRight text={userMsg}/>}
         {displayed.map((text, index) => (
           <BubbleLeft key={index} index={index} text={text} />
         ))}
@@ -33,7 +34,7 @@ export function IntroductionTest() {
                 <p className="animate-bounce animation-delay-[250ms]">.</p>
             </div>
         )}
-      </div>
+      </>
     );
   }
-export default IntroductionTest
+export default TextAppear
