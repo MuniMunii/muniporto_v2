@@ -8,6 +8,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-animation-delay"),],
+  plugins: [require("tailwindcss-animation-delay"),require("tailwind-gradient-mask-image")],
 }
 

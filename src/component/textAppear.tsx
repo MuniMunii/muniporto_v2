@@ -1,21 +1,21 @@
 import { BubbleLeft, BubbleRight } from "./bubbleChat"
 import { useEffect, useState } from "react"
- function TextAppear({setShowChoice,text,userMsg}:{setShowChoice:React.Dispatch<React.SetStateAction<boolean>>,text:string[],userMsg:string|null}) {
+ function TextAppear({setShowChoice,text,userMsg,id}:{id:string,setShowChoice?:React.Dispatch<React.SetStateAction<boolean>>,text:React.ReactNode[]|null,userMsg:string|null}) {
     // nympen state introtext yang udah ke display
-    const [displayed, setDisplayed] = useState<string[]>([]);
+    const [displayed, setDisplayed] = useState<React.ReactNode[]>([]);
     const [loadingIndex, setLoadingIndex] = useState<number | null>(0);
     // useEffect dari dependencyLoadingIndex
     useEffect(() => {
       if (loadingIndex === null) return;
       const timer = setTimeout(() => {
         // manggil text sama index loading index yang udah kepanggil
-        setDisplayed((prev) => [...prev, text[loadingIndex]]);
+        if(text)setDisplayed((prev) => [...prev, text?.[loadingIndex]??""]);
         // expresi kalo loading index lebih kecil dari length akhir introtext 
-        if (loadingIndex < text.length - 1) {
+        if (loadingIndex < (text??Array).length - 1) {
           setLoadingIndex(loadingIndex + 1);
         } else {
           setLoadingIndex(null);
-          setShowChoice(true)
+          setShowChoice?.(true)
         }
       }, 1500);
       return () => clearTimeout(timer);
@@ -23,9 +23,9 @@ import { useEffect, useState } from "react"
   
     return (
       <>
-      {userMsg&&<BubbleRight text={userMsg}/>}
-        {displayed.map((text, index) => (
-          <BubbleLeft key={index} index={index} text={text} />
+      {userMsg&&<BubbleRight id={id} key={`bubble-${userMsg}`} text={userMsg}/>}
+        {text&&displayed.map((text, index) => (
+          <BubbleLeft key={`${userMsg}-${index}=${text}`} index={index} text={text} />
         ))}
         {loadingIndex !== null && (
             <div className="bg-slate-600 relative w-10 h-8 rounded-lg flex justify-center">

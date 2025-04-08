@@ -38,6 +38,7 @@ function useFollowPointer(ref: RefObject<HTMLDivElement | null>) {
 }
 export default function Pointer() {
   const [hover, setHover] = useState<boolean>(false);
+  const [disable,setDisable]=useState<boolean>(false)
   const ref = useRef<HTMLDivElement>(null);
   const { x, y, mouseX, mouseY, viewportX, viewportY } = useFollowPointer(ref);
   const size = hover ? 0 : 12;
@@ -45,8 +46,9 @@ export default function Pointer() {
     
     const interval = setInterval(() => {
       const el = document.elementFromPoint(viewportX.get(), viewportY.get());
+      if(el?.matches('#disable')||el?.closest('#disable')){setDisable(true)}
+      else{setDisable(false)}
       if (el?.matches('#hover')||el?.closest('#hover')||el instanceof HTMLButtonElement) {
-        console.log("Hovering on:", el?.tagName, el?.id);
         setHover(true);
       } else {
         setHover(false);
@@ -58,7 +60,7 @@ export default function Pointer() {
     <motion.div
       ref={ref}
       animate={{padding:size}}
-      className={`size-fit absolute rounded-full z-50 bg-pink-white border-white border-2 flex justify-center items-center`}
+      className={`size-fit absolute rounded-full z-[100] bg-pink-white border-white border-2 flex justify-center items-center`}
       style={{
         pointerEvents: 'none',
         x: useTransform(x, (v) => v - size / 2),
@@ -68,7 +70,7 @@ export default function Pointer() {
         transform:`translate(-50%,-50%)`
       }}
     >
-      <div className="size-3 bg-pink-500 rounded-full"></div>
+      <div className={`size-3 ${disable?'bg-red-600':''} ${hover&&!disable?'bg-green-600':''} bg-pink-600  rounded-full`}></div>
     </motion.div>
   );
 }
