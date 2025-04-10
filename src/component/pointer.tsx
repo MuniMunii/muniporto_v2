@@ -70,7 +70,7 @@ export default function Pointer() {
         transform:`translate(-50%,-50%)`
       }}
     >
-      <div className={`size-3 ${disable?'bg-red-600':''} ${hover&&!disable?'bg-green-600':''} bg-pink-600  rounded-full`}></div>
+      <div className={`size-3 ${disable?'bg-red-600':''} ${hover&&!disable?'bg-green-600':''} ${!hover&&!disable?'bg-pink-600':''}  rounded-full`}></div>
     </motion.div>
   );
 }

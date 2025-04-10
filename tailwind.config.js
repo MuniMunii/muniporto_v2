@@ -6,7 +6,12 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens:{
+        phone:'320px',
+        tablet: '640px',
+      }
+    },
   },
   plugins: [require("tailwindcss-animation-delay"),require("tailwind-gradient-mask-image")],
 }

@@ -1,6 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.custom-list {
+  @apply list-none pl-6;
+}
+.custom-list li {
+  @apply relative mb-2;
+}
+.custom-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: -1rem;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid #22d3ee;
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
