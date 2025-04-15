@@ -50,7 +50,7 @@ function TextAppear({
           );
         })}
       {loadingIndex !== null && (
-        <div className="bg-slate-600 relative w-10 h-8 rounded-lg flex justify-center">
+        <div className="bg-slate-600 relative w-10 h-8 rounded-lg flex justify-center font-bold text-xl">
           <p className="animate-bounce animation-delay-150">.</p>
           <p className="animate-bounce animation-delay-200">.</p>
           <p className="animate-bounce animation-delay-[250ms]">.</p>

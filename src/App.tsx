@@ -6,7 +6,6 @@ import Intro from "./component/intro";
 import { BubbleChoices } from "./component/bubbleChat";
 import TextAppear from "./component/textAppear";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { MdDescription, MdOutlineDescription } from "react-icons/md";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 function App() {
   const [bubbleAppear, setBubbleAppear] = useState<boolean>(false);
@@ -20,7 +19,7 @@ function App() {
     setSession((prev) => [...prev, session]);
   };
   // kalo project ada banyak component ini di jadiin map/reusable component
-  function TestingExpandingBox({id}:{id?:string}) {
+  function TestingExpandingBox({ id }: { id?: string }) {
     const [expand, setExpand] = useState<boolean>(false);
     const [isMobile, setIsMobile] = useState<boolean>(false);
     useEffect(() => {
@@ -97,34 +96,42 @@ function App() {
               {/* <h1 className="text-3xl font-semibold">Muni News</h1> */}
               <div className=" h-full text-left p-4 pb-7 text-[#557] overflow-y-auto flex flex-col gap-3">
                 <div>
-                <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
-                  <p className="flex gap-2 items-center font-semibold text-2xl">
-                    Description
+                  <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
+                    <p className="flex gap-2 items-center font-semibold text-2xl">
+                      Description
+                    </p>
+                  </div>
+                  <p>
+                    This project was built during my internship for a company
+                    focused on delivering high-quality journalism. Readers can
+                    effortlessly browse through stories, while journalists can
+                    easily draft and publish their content without getting lost
+                    in complicated steps.
                   </p>
-                </div>
-                <p>
-                  This project was built during my internship for a company
-                  focused on delivering high-quality journalism.
-                  Readers can effortlessly browse through stories, while journalists can easily draft and publish their content without getting lost in complicated steps.
-                </p>
                 </div>
                 <div className="h-fit">
-                <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
-                  <p className="flex gap-2 items-center font-semibold text-2xl">
-                    Feature
-                  </p>
+                  <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
+                    <p className="flex gap-2 items-center font-semibold text-2xl">
+                      Feature
+                    </p>
+                  </div>
+                  <ul className="custom-list">
+                    <li>Modal Component for interactive UI/UX</li>
+                    <li>Change Theme Dark/light</li>
+                    <li>Auto Save Archived News</li>
+                    <li>Fetch news with Queries/Params</li>
+                    <li>Etc...</li>
+                  </ul>
                 </div>
-                <ul className="custom-list">
-                  <li>Modal Component for interactive UI/UX</li>
-                  <li>Change Theme Dark/light</li>
-                  <li>Auto Save Archived News</li>
-                  <li>Fetch news with Queries</li>
-                  <li>Etc...</li>
-                </ul>
-                </div>
-                
               </div>
-              <a id="hover" href="https://github.com/MuniMunii/MuniNews" className="mt-auto bg-gradient-to-r py-1 absolute bottom-0 left-0 from-[#ff9503] to-[#ff9503]/80 w-full font-semibold text-white flex justify-center items-center gap-2 text-xl">Repository <BsBoxArrowUpRight/></a>
+              <a
+                id="hover"
+                target="_blank"
+                href="https://github.com/MuniMunii/MuniNews"
+                className="mt-auto bg-gradient-to-r py-1 absolute bottom-0 left-0 from-[#ff9503] to-[#ff9503]/80 w-full font-semibold text-white flex justify-center items-center gap-2 text-xl"
+              >
+                Repository <BsBoxArrowUpRight />
+              </a>
             </motion.div>
           )}
         </AnimatePresence>
@@ -165,7 +172,7 @@ function App() {
     "I am a student majoring in System Informations",
     "I've been code since 2021",
     "And i am a self-taught programmer",
-    "I am interested in Web Development",
+    "I am also interested in Web Development",
     "React.js,Javascript,Typescript,Github And Tailwind.css are technology i often use",
     "And Theres also technology i sometime use like Express,Node.js,etc..",
     "Now you know about me (｡•̀ᴗ-)✧",
@@ -173,7 +180,22 @@ function App() {
       ? "Thank you for wanna know more about me!"
       : "Is there anything else you want to know?",
   ];
-  const projectText = ["Sure This is my project",<TestingExpandingBox id={'target'} key={'project-1'}/>];
+  const projectText = [
+    "Sure This is my project i was proud of!",
+    <TestingExpandingBox id={"target"} key={"project-1"} />,
+    "Theres also many of my playground project",
+    "Or I can say playing with new stuff",
+    "Here is one of the example",
+    <a
+      href="https://munimunii.github.io/MuniSekai/#"
+      id="hover"
+      target="_black"
+      className="font-semibold"
+    >
+       Visit Here: <span className="text-cyan-400">MuniSekai</span>
+    </a>,
+    "You can also check my github for more!",
+  ];
   const contactText = [
     "Sure Here is my contact list that you can reach.",
     <>
@@ -184,17 +206,17 @@ function App() {
         </a>
       </span>
     </>,
-    "I use WhatsApp too, Here is my number +628998667353",
-    "Here is my other contact",
+    "Here is my other Social Medias",
     linkMap,
     "I hope we can make a good connection! ദ്ദി・ᴗ・)✧",
   ];
   return (
     <>
+    <div className="bg-black/40 mask-center-radial  -z-10 fixed w-full h-full left-0 top-0"></div>
       <Pointer />
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {!bubbleAppear ? <Intro setBubbleAppear={setBubbleAppear} /> : null}
-      </AnimatePresence> */}
+      </AnimatePresence>
       <div className="w-[93%] mx-auto py-6">
         <AnimatePresence>
           {(showCaseProject || introAppear || contactAppear) && (
@@ -240,7 +262,7 @@ function App() {
             </div>
           )}
         </AnimatePresence>
-        <motion.button
+        {/* <motion.button
           id="hover"
           whileHover={{ scale: 1.1 }}
           onClick={() => {
@@ -250,7 +272,7 @@ function App() {
           className="rounded-md py-1 px-3 bg-blue-500 text-black"
         >
           Test
-        </motion.button>
+        </motion.button> */}
         <div className="flex flex-col w-full gap-4">
           <AnimatePresence initial={false}>
             {bubbleAppear ? (
@@ -287,7 +309,17 @@ function App() {
               }
               if (session === "project") {
                 // return <TestingExpandingBox />;
-                return <TextAppear id="project" key={'project-info'}  userMsg={'I know you ve been working on some project, Tell me which project have you been most proud of, and why?'} text={projectText} setShowChoice={setShowChoices} />
+                return (
+                  <TextAppear
+                    id="project"
+                    key={"project-info"}
+                    userMsg={
+                      "I know you ve been working on some project, Tell me which project have you been most proud of, and why?"
+                    }
+                    text={projectText}
+                    setShowChoice={setShowChoices}
+                  />
+                );
               }
             })}
             {showChoices ? (
