@@ -1,5 +1,5 @@
 import "./App.css";
-import { motion, AnimatePresence, delay } from "framer-motion";
+import { motion, AnimatePresence} from "framer-motion";
 import { useEffect, useState } from "react";
 import Pointer from "./component/pointer";
 import Intro from "./component/intro";
@@ -40,6 +40,7 @@ function App() {
     return (
       <motion.div
         layout
+        id={id}
         key={"project-test"}
         initial={{ width: "288px", height: "244px", scale: 0.8 }}
         animate={{ width: width, height: height, scale: 1 }}
