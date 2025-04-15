@@ -12,6 +12,8 @@ function Intro({setBubbleAppear}:{setBubbleAppear:React.Dispatch<SetStateAction<
           onClick={() => setBubbleAppear(true)}
           onHoverStart={() => setHovered(true)}
           onHoverEnd={() => setHovered(false)}
+          onTapStart={() => setHovered(true)}
+          onTapCancel={() => setHovered(false)}
           id="hover"
           className="group w-fit overflow-hidden flex justify-center items-center flex-col relative z-20"
         >
