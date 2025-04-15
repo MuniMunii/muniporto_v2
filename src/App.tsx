@@ -13,6 +13,17 @@ function App() {
   const [introAppear, setIntroAppear] = useState<boolean>(false);
   const [showCaseProject, setShowCaseProject] = useState<boolean>(false);
   const [contactAppear, setContactAppear] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  useEffect(() => {
+    const mediaQueries = window.matchMedia("(max-width: 640px)");
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+    setIsMobile(mediaQueries.matches);
+    mediaQueries.addEventListener("change", handleMediaQueryChange);
+    return () =>
+      mediaQueries.removeEventListener("change", handleMediaQueryChange);
+  }, []);
   //Note:1 debug chat session
   const [session, setSession] = useState<string[]>([]);
   const handleSession = (session: string) => {
@@ -21,20 +32,9 @@ function App() {
   // kalo project ada banyak component ini di jadiin map/reusable component
   function TestingExpandingBox({ id }: { id?: string }) {
     const [expand, setExpand] = useState<boolean>(false);
-    const [isMobile, setIsMobile] = useState<boolean>(false);
     useEffect(() => {
       console.log(isMobile);
     }, [isMobile]);
-    useEffect(() => {
-      const mediaQueries = window.matchMedia("(max-width: 640px)");
-      const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-        setIsMobile(event.matches);
-      };
-      setIsMobile(mediaQueries.matches);
-      mediaQueries.addEventListener("change", handleMediaQueryChange);
-      return () =>
-        mediaQueries.removeEventListener("change", handleMediaQueryChange);
-    }, []);
     const width = isMobile ? "100%" : expand ? "80%" : "288px";
     const height = isMobile ? "fit-content" : expand ? "488px" : "300px";
     return (
@@ -214,7 +214,7 @@ function App() {
   return (
     <>
     <div className="bg-black/40 mask-center-radial  -z-10 fixed w-full h-full left-0 top-0"></div>
-      <Pointer />
+      {isMobile?null:<Pointer />}
       <AnimatePresence>
         {!bubbleAppear ? <Intro setBubbleAppear={setBubbleAppear} /> : null}
       </AnimatePresence>
