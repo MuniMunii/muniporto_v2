@@ -3,11 +3,12 @@ import { motion, AnimatePresence} from "framer-motion";
 import { useEffect, useState } from "react";
 import Pointer from "./component/pointer";
 import Intro from "./component/intro";
-import { BubbleChoices } from "./component/bubbleChat";
+import { BubbleChoices, BubbleLeft } from "./component/bubbleChat";
 import TextAppear from "./component/textAppear";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { FaDownload, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { Analytics } from "@vercel/analytics/react";
+import resumePDF from "../src/assets/cv_Ramzi_Akbar_Ramadhan_2025.pdf"
 function App() {
   const [bubbleAppear, setBubbleAppear] = useState<boolean>(false);
   const [showChoices, setShowChoices] = useState<boolean>(false);
@@ -153,7 +154,7 @@ function App() {
       id="hover"
       target="_blank"
       key={`${link.name}-${index}`}
-      className="bg-black rounded-md px-2 py-1 flex items-center gap-2 mt-2"
+      className="bg-slate-900 rounded-md px-2 py-1 flex items-center gap-2 mt-2"
       href={link.url}
     >
       {link.icon}
@@ -210,6 +211,8 @@ function App() {
     </>,
     "Here is my other Social Medias",
     linkMap,
+    "You can also download my Resume!",
+    <a href={resumePDF} download={true} id="hover" className="bg-slate-900 rounded-md px-2 py-1 flex items-center gap-2 mt-2">Download Here <FaDownload/></a>,
     "I hope we can make a good connection! ദ്ദി・ᴗ・)✧",
   ];
   return (
@@ -231,6 +234,7 @@ function App() {
                     return (
                       <motion.a
                         id="hover"
+                        key={'intro-session'}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         href="#intro"
@@ -242,6 +246,7 @@ function App() {
                     return (
                       <motion.a
                         id="hover"
+                        key={'contact-session'}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         href="#contact"
@@ -253,6 +258,7 @@ function App() {
                     return (
                       <motion.a
                         id="hover"
+                        key={'project-session'}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         href="#project"
@@ -265,6 +271,7 @@ function App() {
             </div>
           )}
         </AnimatePresence>
+        {/* debugging */}
         {/* <motion.button
           id="hover"
           whileHover={{ scale: 1.1 }}
@@ -337,7 +344,7 @@ function App() {
                   setIntroAppear={setIntroAppear}
                   setShowChoices={setShowChoices}
                 />
-              ) : null
+              ) : <BubbleLeft text="Thats all about myself,Thank you" index={introAppear?16:9}/>
             ) : null}
           </AnimatePresence>
         </div>

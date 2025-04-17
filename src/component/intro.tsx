@@ -4,6 +4,7 @@ function Intro({setBubbleAppear}:{setBubbleAppear:React.Dispatch<SetStateAction<
       const [hovered, setHovered] = useState(false);
     return (
         <motion.div
+        key={'intro-index'}
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed w-screen h-screen flex flex-col justify-center items-center bg-black p-2"

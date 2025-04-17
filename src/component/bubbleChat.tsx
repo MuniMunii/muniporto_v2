@@ -20,7 +20,7 @@ interface BubbleProps{
 }
 function BubbleChoices({handleSession,setShowChoices,setContactAppear,setIntroAppear,setShowCaseProject,introAppear,contactAppear,showCaseProject}:BubbleProps){
     return (
-        <motion.div initial={{opacity:0,scale:0.8}} animate={{opacity:1,scale:1,transition:{delay:1.4,duration:0.2}}} variants={chatAppearEffect} className="ml-auto w-fit h-fit flex justify-end z-10 isolate ">
+        <motion.div key={`choices-${introAppear}-${contactAppear}-${showCaseProject}`} initial={{opacity:0,scale:0.8}} animate={{opacity:1,scale:1,transition:{delay:1.4,duration:0.2}}} variants={chatAppearEffect} className="ml-auto w-fit h-fit flex justify-end z-10 isolate ">
             <div className="w-72 text-left h-fit p-3 relative flex flex-col gap-3 bg-gray-600 rounded-lg">
             <div className="right-tail"/>
             {introAppear?<motion.button id="disable" className="text-pink-200 rounded p-2 text-sm border border-slate-900 cursor-not-allowed">Tell me about yourself!</motion.button>:<motion.button onClick={()=>{setIntroAppear(true);setShowChoices?.(false); handleSession("intro")}} id="hover" whileTap={{scale:0.9}} className="text-pink-200 rounded p-2 text-sm bg-slate-900 pointer-events-auto z-30">Tell me about yourself!</motion.button>}
@@ -32,7 +32,7 @@ function BubbleChoices({handleSession,setShowChoices,setContactAppear,setIntroAp
 }
 function BubbleRight({text,id}:{text:string,id:string}){
     return (
-        <motion.div initial={{opacity:0,scale:0.8}} id={id} animate={{opacity:1,scale:1,transition:{delay:0.2,duration:0.2}}} variants={chatAppearEffect} className="ml-auto w-fit h-fit flex justify-end z-10">
+        <motion.div initial={{opacity:0,scale:0.8}} key={`bubble-${text}`} id={id} animate={{opacity:1,scale:1,transition:{delay:0.2,duration:0.2}}} variants={chatAppearEffect} className="ml-auto w-fit h-fit flex justify-end z-10">
             <div className="w-72 text-left h-fit p-3 relative flex flex-col bg-gray-600 rounded-lg">
             <div className="right-tail"/>
             <p className="text-white rounded p-2 text-sm pointer-events-auto text-left">{text}</p>
