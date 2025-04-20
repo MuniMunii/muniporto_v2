@@ -335,6 +335,7 @@ function App() {
             {showChoices ? (
               !introAppear || !contactAppear || !showCaseProject ? (
                 <BubbleChoices
+                index={introAppear?16:9}
                   handleSession={handleSession}
                   introAppear={introAppear}
                   contactAppear={contactAppear}
