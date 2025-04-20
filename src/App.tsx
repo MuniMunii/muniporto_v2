@@ -8,6 +8,7 @@ import TextAppear from "./component/textAppear";
 import { FaDownload, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import resumePDF from "../src/assets/cv_Ramzi_Akbar_Ramadhan_2025.pdf"
 function App() {
   const [bubbleAppear, setBubbleAppear] = useState<boolean>(false);
@@ -217,6 +218,7 @@ function App() {
   ];
   return (
     <>
+    <SpeedInsights/>
     <Analytics/>
     <div className="bg-black/40 mask-center-radial  -z-10 fixed w-full h-full left-0 top-0"></div>
       {isMobile?null:<Pointer />}
