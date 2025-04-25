@@ -205,8 +205,8 @@ function App() {
     <>
       Email:{" "}
       <span>
-        <a id="hover" href="mailto:tyuimiti@gmail.com" className="text-red-400">
-          tyuimiti@gmail.com
+        <a id="hover" href="mailto:ramziakbar03311@gmail.com" className="text-red-400">
+          ramziakbar03311@gmail.com
         </a>
       </span>
     </>,
