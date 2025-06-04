@@ -191,7 +191,7 @@ function App() {
     "Or I can say playing with new stuff",
     "Here is one of the example",
     <a
-      href="https://munimunii.github.io/MuniSekai/#"
+      href="https://munisekai-v2.vercel.app/"
       id="hover"
       target="_black"
       className="font-semibold"
