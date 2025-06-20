@@ -48,7 +48,7 @@ function BubbleLeft({text,index}:{text:React.ReactNode|null,index:number|null}){
             <div className="w-72 text-left min-h-7 h-fit p-3 relative flex flex-col bg-gray-600 rounded-lg">
             <div className="left-tail"/>
             <p className="text-pink-200 text-sm">Ramzi</p>
-            <p>{text}</p>
+            {text}
             <p className="text-right text-xs text-black/70 w-fit ml-auto">{time}</p>
             </div>
           </motion.div>

@@ -1,5 +1,5 @@
 import { BubbleLeft, BubbleRight } from "./bubbleChat";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import React from "react";
 function TextAppear({
   setShowChoice,
@@ -15,6 +15,7 @@ function TextAppear({
   // nympen state introtext yang udah ke display
   const [displayed, setDisplayed] = useState<React.ReactNode[]>([]);
   const [loadingIndex, setLoadingIndex] = useState<number | null>(0);
+   const lastItemRef = useRef<HTMLDivElement>(null);
   // useEffect dari dependencyLoadingIndex
   useEffect(() => {
     if (loadingIndex === null) return;
@@ -31,7 +32,16 @@ function TextAppear({
     }, 1500);
     return () => clearTimeout(timer);
   }, [loadingIndex]);
-
+   useEffect(() => {
+    if (displayed.length > 0) {
+      setTimeout(() => {
+        lastItemRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    }
+  }, [displayed.length]);
   return (
     <>
       {userMsg && (
@@ -39,14 +49,19 @@ function TextAppear({
       )}
       {text &&
         displayed.map((text, index) => {
+           const isLast = index === displayed.length - 1;
           if (React.isValidElement(text)) {
             const element = text as React.ReactElement<{ id?: string }>;
-            if (element.props.id === "target") {
-              return element;
+            if (element.props.id?.startsWith('target')) {
+              return <div key={`target-wrapper-${index}`} ref={isLast ? lastItemRef : null}>
+                  {element}
+                </div>
             }
           }
           return (
-            <BubbleLeft key={`${userMsg}-${index}`} index={index} text={text} />
+            <div key={`${userMsg}-${index}`} ref={isLast ? lastItemRef : null}>
+              <BubbleLeft index={index} text={text} />
+            </div>
           );
         })}
       {loadingIndex !== null && (

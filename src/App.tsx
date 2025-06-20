@@ -6,10 +6,11 @@ import Intro from "./component/intro";
 import { BubbleChoices, BubbleLeft } from "./component/bubbleChat";
 import TextAppear from "./component/textAppear";
 import { FaDownload, FaGithub, FaLinkedin } from "react-icons/fa6";
-import { BsBoxArrowUpRight } from "react-icons/bs";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import resumePDF from "../src/assets/cv_Ramzi_Akbar_Ramadhan_2025.pdf"
+import ExpandingBox from "./component/expanding_box";
+import { DataProject } from "./data";
 function App() {
   const [bubbleAppear, setBubbleAppear] = useState<boolean>(false);
   const [showChoices, setShowChoices] = useState<boolean>(false);
@@ -32,116 +33,7 @@ function App() {
   const handleSession = (session: string) => {
     setSession((prev) => [...prev, session]);
   };
-  // kalo project ada banyak component ini di jadiin map/reusable component
-  function TestingExpandingBox({ id }: { id?: string }) {
-    const [expand, setExpand] = useState<boolean>(false);
-    useEffect(() => {
-      console.log(isMobile);
-    }, [isMobile]);
-    const width = isMobile ? "100%" : expand ? "80%" : "288px";
-    const height = isMobile ? "fit-content" : expand ? "488px" : "300px";
-    return (
-      <motion.div
-        layout
-        id={id}
-        key={"project-test"}
-        initial={{ width: "288px", height: "244px", scale: 0.8 }}
-        animate={{ width: width, height: height, scale: 1 }}
-        transition={{
-          width: { duration: 0.3 },
-          height: { duration: 0.3, delay: 0.3 },
-        }}
-        className="bg-gray-600 rounded-lg relative flex tablet:flex-row phone:flex-col gap-2 p-2"
-      >
-        <div className="left-tail"></div>
-        <motion.div
-          className={`bg-[#060a18] flex-col flex overflow-hidden ${
-            isMobile
-              ? "w-full h-full max-h-fit"
-              : expand
-              ? "w-60 h-full"
-              : "w-full max-w-72 h-full"
-          } rounded-md`}
-        >
-          {/* image */}
-          <motion.div
-            animate={{ width: "100%", height: "240px" }}
-            className={`bg-[#0B132B] font-semibold text-5xl max-h-48 rounded-md flex justify-center items-center pointer-events-none select-none`}
-          >
-            <p className="flex flex-wrap gap-2 justify-center">
-              Muni <span className="bg-pink-500 py-1 px-2">News</span>
-            </p>
-          </motion.div>
-          {/* tittle / description */}
-          <div className="p-2">
-            {/* <h1 className="text-2xl font-semibold">Muni News</h1> */}
-            <p className="text-center">
-              A place for Journalist to write News and Searching for inpirations
-            </p>
-          </div>
-          <button
-            className="w-full text-center mt-auto bg-blue-600 py-2"
-            onClick={() => {
-              setExpand(!expand);
-            }}
-          >
-            {expand ? "Shrink" : "Expand"}
-          </button>
-        </motion.div>
-        <AnimatePresence>
-          {expand && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ opacity: { delay: 0.1 } }}
-              className="w-full h-full bg-gray-100 overflow-hidden rounded-md text-black relative "
-            >
-              {/* <h1 className="text-3xl font-semibold">Muni News</h1> */}
-              <div className=" h-full text-left p-4 pb-7 text-[#557] overflow-y-auto flex flex-col gap-3">
-                <div>
-                  <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
-                    <p className="flex gap-2 items-center font-semibold text-2xl">
-                      Description
-                    </p>
-                  </div>
-                  <p>
-                    This project was built during my internship for a company
-                    focused on delivering high-quality journalism. Readers can
-                    effortlessly browse through stories, while journalists can
-                    easily draft and publish their content without getting lost
-                    in complicated steps.
-                  </p>
-                </div>
-                <div className="h-fit">
-                  <div className="bg-gradient-to-r from-[#464668] to-[#464668]/80 py-1 px-3 text-white rounded-md">
-                    <p className="flex gap-2 items-center font-semibold text-2xl">
-                      Feature
-                    </p>
-                  </div>
-                  <ul className="custom-list">
-                    <li>Modal Component for interactive UI/UX</li>
-                    <li>Change Theme Dark/light</li>
-                    <li>Auto Save Archived News</li>
-                    <li>Fetch news with Queries/Params</li>
-                    <li>Etc...</li>
-                  </ul>
-                </div>
-              </div>
-              <a
-                id="hover"
-                target="_blank"
-                href="https://github.com/MuniMunii/MuniNews"
-                className="mt-auto bg-gradient-to-r py-1 absolute bottom-0 left-0 from-[#ff9503] to-[#ff9503]/80 w-full font-semibold text-white flex justify-center items-center gap-2 text-xl"
-              >
-                Repository <BsBoxArrowUpRight />
-              </a>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    );
-  }
+
   const contactLink = [
     {
       name: "LinkedIn",
@@ -186,7 +78,7 @@ function App() {
   ];
   const projectText = [
     "Sure This is my project i was proud of!",
-    <TestingExpandingBox id={"target"} key={"project-1"} />,
+    ...DataProject.map((content,index)=>(<ExpandingBox key={'Project'+index} content={content} isMobile={isMobile} id={`target-${index}`}/>)),
     "Theres also many of my playground project",
     "Or I can say playing with new stuff",
     "Here is one of the example",
